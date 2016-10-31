@@ -21465,25 +21465,87 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var propTypes = {};
-	
 	var App = function (_Component) {
 	  _inherits(App, _Component);
 	
-	  function App() {
+	  function App(props) {
 	    _classCallCheck(this, App);
 	
-	    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+	
+	    _this.state = { notess: [] };
+	    _this.logIn = _this.logIn.bind(_this);
+	    _this.signUp = _this.signUp.bind(_this);
+	    _this.signOut = _this.signOut.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(App, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.updateAuth();
+	      if (_reactCookie2.default.load('token')) {}
+	    }
+	  }, {
+	    key: 'signOut',
+	    value: function signOut() {
+	      var _this2 = this;
+	
+	      _superagent2.default.post('/api/signout').then(function () {
+	        return _this2.updateAuth();
+	      });
+	    }
+	  }, {
+	    key: 'updateAuth',
+	    value: function updateAuth() {
+	      this.setState({
+	        token: _reactCookie2.default.load('token')
+	      });
+	    }
+	  }, {
+	    key: 'logIn',
+	    value: function logIn(userDetails) {
+	      var _this3 = this;
+	
+	      _superagent2.default.post('/api/login').send(userDetails).then(function () {
+	        _this3.updateAuth();
+	      });
+	    }
+	  }, {
+	    key: 'signUp',
+	    value: function signUp(userDetails) {
+	      var _this4 = this;
+	
+	      _superagent2.default.post('/api/signup').send(userDetails).then(function () {
+	        _this4.updateAuth();
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
-	      _react2.default.createElement(
+	      var userDisplayElement = void 0;
+	      if (this.state.token) {
+	        userDisplayElement = _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.signOut },
+	            'Log Out'
+	          )
+	        );
+	      } else {
+	        userDisplayElement = _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_userForm2.default, { handleSubmit: this.signUp, buttonText: 'SignUp' }),
+	          _react2.default.createElement(_userForm2.default, { handleSubmit: this.logIn, buttonText: 'LogIn' })
+	        );
+	      }
+	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_userForm2.default, { handleSubmit: this.signUp, buttonText: 'SignUp' }),
-	        _react2.default.createElement(_userForm2.default, { handleSubmit: this.logIn, buttonText: 'LogIn' })
+	        userDisplayElement
 	      );
 	    }
 	  }]);
@@ -21491,7 +21553,6 @@
 	  return App;
 	}(_react.Component);
 	
-	App.propTypes = propTypes;
 	exports.default = App;
 
 /***/ },
