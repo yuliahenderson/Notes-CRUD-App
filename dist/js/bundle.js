@@ -21578,7 +21578,6 @@
 	        userDisplayElement = _react2.default.createElement(
 	          'div',
 	          null,
-	          _react2.default.createElement('img', { className: 'logo', src: '../../dist/stylesheets/logo.png' }),
 	          _react2.default.createElement(_userForm2.default, { handleSubmit: this.signUp, buttonText: 'SignUp' }),
 	          _react2.default.createElement(_userForm2.default, { handleSubmit: this.logIn, buttonText: 'LogIn' })
 	        );

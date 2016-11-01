@@ -3,7 +3,25 @@ body {
 }
 
 #login-form {
-  margin-left: 40%;
+  margin-left: 35%;
 }
 
+.logo {
+  width: 40%;
+  margin-left: 33%;
+  margin-top: 10%;
+}
+ input {
+  height: 2em;
+  width: 14em;
+  text-align: center;
+  font-size: 0.8em;
+ }
+
+input[type="submit"] {
+  border: none;
+  height: 2em;
+  width: 6em;
+  margin-left: 1em;
+}
 

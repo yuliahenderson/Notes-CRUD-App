@@ -79,7 +79,6 @@ signUp(userDetails) {
   } else {
     userDisplayElement = (
       <div>
-        <img className='logo' src='../../dist/stylesheets/logo.png' />
         <UserForm handleSubmit={this.signUp} buttonText="SignUp" />
         <UserForm handleSubmit={this.logIn} buttonText="LogIn" />
       </div>
