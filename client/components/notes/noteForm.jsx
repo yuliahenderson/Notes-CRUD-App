@@ -1,14 +1,13 @@
 import React from 'react';
 
 const propTypes = {
-  handleSubmit: React.PropTypes.func,
-  buttonText: React.PropTypes.string,
+  sendNote: React.PropTypes.func,
 };
 
-class UserForm extends React.Component {
+class NoteForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { email: '', password: '' };
+    this.state = { body: '' };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -22,33 +21,25 @@ class UserForm extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    this.props.handleSubmit(this.state);
+    this.props.sendNote(this.state);
   }
   render() {
     return (
-      <div id="login-form">
+      <div>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            name="email"
-            value={this.state.email}
-            placeholder="email"
+            name="body"
+            value={this.state.body}
             onChange={this.handleInputChange}
           />
-          <input
-            type="password"
-            name="password"
-            value={this.state.password}
-            placeholder="password"
-            onChange={this.handleInputChange}
-          />
-          <input type="submit" value={this.props.buttonText} />
+          <input type="submit" value="POST" />
         </form>
       </div>
     );
   }
 }
 
-UserForm.propTypes = propTypes;
+NoteForm.propTypes = propTypes;
 
-export default UserForm;
+export default NoteForm;

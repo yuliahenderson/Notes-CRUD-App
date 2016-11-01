@@ -1,3 +1,9 @@
 body {
-  background-color: lightpink;
+  background-color: #f8c3d8;
 }
+
+#login-form {
+  margin-left: 40%;
+}
+
+

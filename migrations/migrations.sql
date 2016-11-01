@@ -5,3 +5,9 @@ CREATE TABLE users(
   email VARCHAR NOT NULL,
   password VARCHAR NOT NULL
 );
+
+CREATE TABLE notes (
+  id SERIAL PRIMARY KEY,
+  body VARCHAR NOT NULL,
+  user_id INTEGER REFERENCES users (id)
+);

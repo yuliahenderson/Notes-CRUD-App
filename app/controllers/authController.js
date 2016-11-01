@@ -1,9 +1,9 @@
-const UserDAO = require('../services/UserDAO');
+const UserDAO = require('../services/userDAO');
 const createToken = require('../utilis/createToken');
 const bcrypt = require('bcrypt');
 
 class AuthController {
-  static login(req, res) {
+  static logIn(req, res) {
     const { email, password } = req.body;
     UserDAO.findBy({ email })
       .then((user) => {
